@@ -20,10 +20,16 @@ var title= document.getElementsByClassName("title");
 //console.log(title);
 title[0].style.color="green";
 title[0].style.fontWeight="bold";*/
-var items = document.getElementsByClassName("list-group-item");
-items[2].style.backgroundColor = 'green';
+/*var items = document.getElementsByClassName("list-group-item");
+items[2].style.color = 'green';
 for(var i=0;i<items.length;i++)
 {
     items[i].style.fontWeight='bold';
-}
+}*/
 
+var list = document.getElementsByTagName('li');
+list[2].style.color = 'green';
+for(var i=0;i<list.length;i++)
+{
+    list[i].style.fontWeight='bold';
+}
