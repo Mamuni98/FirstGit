@@ -26,10 +26,27 @@ for(var i=0;i<items.length;i++)
 {
     items[i].style.fontWeight='bold';
 }*/
-
-var list = document.getElementsByTagName('li');
+/*var list = document.getElementsByTagName('li');
 list[2].style.color = 'green';
 for(var i=0;i<list.length;i++)
 {
     list[i].style.fontWeight='bold';
+}*/
+//QUERY SELECTOR
+/*var header = document.querySelector('#main-header');
+header.style.borderBottom = "3px solid black";
+var input = document.querySelector('input[type="submit"]');
+input.value = "Click here";*/
+//DELIVERABLE
+var seconditem = document.querySelector('.list-group-item:nth-child(2)');
+seconditem.style.backgroundColor = "green";
+var thirditem = document.querySelector('.list-group-item:nth-child(3)');
+thirditem.style.color = "white";
+//QUERYSELECTOR ALL
+var item = document.querySelectorAll('li');
+item[1].style.color = "green";
+var odd = document.querySelectorAll('li:nth-child(odd)');
+for(var i=0;i<odd.length;i=i+1)
+{
+    odd[i].style.backgroundColor = "green";
 }
