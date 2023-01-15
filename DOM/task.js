@@ -38,7 +38,7 @@ header.style.borderBottom = "3px solid black";
 var input = document.querySelector('input[type="submit"]');
 input.value = "Click here";*/
 //DELIVERABLE
-var seconditem = document.querySelector('.list-group-item:nth-child(2)');
+/*var seconditem = document.querySelector('.list-group-item:nth-child(2)');
 seconditem.style.backgroundColor = "green";
 var thirditem = document.querySelector('.list-group-item:nth-child(3)');
 thirditem.style.color = "white";
@@ -49,4 +49,39 @@ var odd = document.querySelectorAll('li:nth-child(odd)');
 for(var i=0;i<odd.length;i=i+1)
 {
     odd[i].style.backgroundColor = "green";
-}
+}*/
+
+//var itemList = document.querySelector('#items');
+//console.log(itemList.parentNode);
+//console.log(itemList.parentElement);
+//itemList.parentElement.style.backgroundColor = 'grey';
+//console.log(itemList.childNodes);
+//console.log(itemList.children);
+//itemList.children[1].textContent = "Hello";
+/*console.log(itemList.firstChild);
+console.log(itemList.firstElementChild);
+itemList.firstElementChild.style.backgroundColor = "red";*/
+/*console.log(itemList.lastChild);
+console.log(itemList.lastElementChild);
+itemList.lastElementChild.style.backgroundColor = "red";*/
+/*console.log(itemList.previousSibling);
+console.log(itemList.previousElementSibling);
+console.log(itemList.nextSibling);
+console.log(itemList.nextElementSibling);*/
+
+//CREATE NEW ELEMENT
+
+var newDiv = document.createElement('div');
+newDiv.className = "hello";
+newDiv.id = 'hello 1';
+newDiv.setAttribute("title", "HELLO");
+var newDivText = document.createTextNode("Hello");
+newDiv.appendChild(newDivText);
+var container = document.querySelector('header .container');
+var h1 = document.querySelector('header h1');
+container.insertBefore(newDiv, h1);
+console.log(newDiv);
+
+var itemList = document.querySelector('#items');
+//console.log(itemList.innerHTML);
+itemList.innerHTML = "<li> Hello </li>" + itemList.innerHTML;
