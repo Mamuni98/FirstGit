@@ -88,15 +88,17 @@ itemList.innerHTML = "<li> Hello </li>" + itemList.innerHTML;*/
 
 var form = document.getElementById('addForm');
 var item = document.getElementById('items');
+var filter = document.getElementById('filter');
 
 form.addEventListener('submit', addItem);
 function addItem(e)
 {
     e.preventDefault();
   var newItem = document.getElementById('item').value;
+  var newdes = document.getElementById('description').value;
   var list = document.createElement('li');
   list.className ='list-group-item';
-  list.appendChild(document.createTextNode(newItem));
+  list.appendChild(document.createTextNode(newItem + newdes));
   var deleteLi = document.createElement('button');
   deleteLi.className = "btn btn-danger btn-sm float-right delete";
   deleteLi.appendChild(document.createTextNode('X'));
@@ -121,3 +123,25 @@ function removeItem(e){
     }
 
 }
+
+filter.addEventListener('keyup', filterItems);
+
+// Filter Items
+function filterItems(e){
+    // convert text to lowercase
+    var text = e.target.value.toLowerCase();
+    
+    // Get list
+    var items = item.getElementsByTagName('li');
+    // Convert to an array
+    Array.from(items).forEach(function(i){
+      var itemName = i.firstChild.textContent;
+      var desName = i.lastChild.textContent;
+    
+      if(itemName.toLowerCase().indexOf(text) != -1 || desName.toLowerCase().indexOf(text) != -1){
+        i.style.display = 'block';
+      } else {
+        i.style.display = 'none';
+      }
+    });
+  }
