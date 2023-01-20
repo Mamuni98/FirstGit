@@ -38,10 +38,15 @@
           addName:document.getElementById('name').value,
           email:document.getElementById('email').value
         }
+        
         const UserDetail = JSON.stringify(userdetail);
-        localStorage.setItem('userDetail', UserDetail);
-        console.log(UserDetail);
-       }
+        const Useremail = JSON.stringify(userdetail.email);
+        const UserName = JSON.stringify(userdetail.addName);
+        localStorage.setItem(Useremail, UserDetail);
+        var list = document.createElement('li');
+        list.appendChild(document.createTextNode(UserName+' -'+Useremail));
+        form.appendChild(list);
+      }
        </script>
   </body>
 </html>
