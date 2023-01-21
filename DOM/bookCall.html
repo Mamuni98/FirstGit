@@ -26,26 +26,39 @@
           <input type="text" id="email" required>
         </div>
         <input class="btn" type="submit" value="Submit">
-      </form>
+        </form>
+        <ul id="lists"></ul>
     </section>
     <script>
      const form = document.getElementById('my-form');
+     const list = document.getElementById('lists');
       form.addEventListener('submit', addItem);
        function addItem(e)
        {
         e.preventDefault();
+        const email = e.target.email.value;
+        const Name = e.target.name.value;
         const userdetail = {
-          addName:document.getElementById('name').value,
-          email:document.getElementById('email').value
+          Name,
+          email
         }
-        
-        const UserDetail = JSON.stringify(userdetail);
-        const Useremail = JSON.stringify(userdetail.email);
-        const UserName = JSON.stringify(userdetail.addName);
-        localStorage.setItem(Useremail, UserDetail);
-        var list = document.createElement('li');
-        list.appendChild(document.createTextNode(e.target.name.value+' - '+e.target.email.value));
-        form.appendChild(list);
+        localStorage.setItem(userdetail.email, JSON.stringify(userdetail));
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(Name+' - '+email));
+        var dlt = document.createElement('button');
+        dlt.className = 'delete';
+        dlt.appendChild(document.createTextNode('Delete'));
+        li.appendChild(dlt);
+        list.appendChild(li);
+      }
+      list.addEventListener('click', deleteItem);
+      function deleteItem(e){
+        if(e.target.classList.contains('delete'))
+        {
+          var dltLi = e.target.parentElement;
+          list.removeChild(dltLi);
+        }
+
       }
        </script>
   </body>
