@@ -52,7 +52,7 @@
         list.appendChild(li);
         dlt.addEventListener('click', deleteItem);
         function deleteItem(e){
-          localStorage.removeItem(userdetail.email, JSON.stringify(userdetail))
+          localStorage.removeItem(userdetail.email);
           list.removeChild(li);
         }
         
