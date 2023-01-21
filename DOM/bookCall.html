@@ -26,8 +26,9 @@
           <input type="text" id="email" required>
         </div>
         <input class="btn" type="submit" value="Submit">
-        </form>
         <ul id="lists"></ul>
+        </form>
+        
     </section>
     <script>
      const form = document.getElementById('my-form');
@@ -46,20 +47,17 @@
         var li = document.createElement('li');
         li.appendChild(document.createTextNode(Name+' - '+email));
         var dlt = document.createElement('button');
-        dlt.className = 'delete';
         dlt.appendChild(document.createTextNode('Delete'));
         li.appendChild(dlt);
         list.appendChild(li);
-      }
-      list.addEventListener('click', deleteItem);
-      function deleteItem(e){
-        if(e.target.classList.contains('delete'))
-        {
-          var dltLi = e.target.parentElement;
-          list.removeChild(dltLi);
+        dlt.addEventListener('click', deleteItem);
+        function deleteItem(e){
+          localStorage.removeItem(userdetail.email, JSON.stringify(userdetail))
+          list.removeChild(li);
         }
-
+        
       }
+
        </script>
   </body>
 </html>
