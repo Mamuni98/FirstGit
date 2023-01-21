@@ -44,7 +44,7 @@
         const UserName = JSON.stringify(userdetail.addName);
         localStorage.setItem(Useremail, UserDetail);
         var list = document.createElement('li');
-        list.appendChild(document.createTextNode(UserName+' -'+Useremail));
+        list.appendChild(document.createTextNode(e.target.name.value+' - '+e.target.email.value));
         form.appendChild(list);
       }
        </script>
