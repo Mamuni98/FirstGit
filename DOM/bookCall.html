@@ -49,12 +49,22 @@
         var dlt = document.createElement('button');
         dlt.appendChild(document.createTextNode('Delete'));
         li.appendChild(dlt);
-        list.appendChild(li);
+        
         dlt.addEventListener('click', deleteItem);
         function deleteItem(e){
           localStorage.removeItem(userdetail.email);
           list.removeChild(li);
         }
+        var edit = document.createElement('button');
+        edit.appendChild(document.createTextNode('Edit'));
+        li.appendChild(edit);
+        edit.onclick = () => {
+          localStorage.removeItem(userdetail.email);
+          document.getElementById('name').value = userdetail.Name;
+          document.getElementById('email').value = userdetail.email;
+          list.removeChild(li);
+        }
+        list.appendChild(li);
         
       }
 
