@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+    <header>
+        <h2>EXPENSE TRACKER</h2>
+      </header>
+  
+      <section class="container">
+        <form id="my-form">
+            <div class="msg"></div>
+          <div>
+            <label for="amount">Choose expenseamount:</label>
+            <input type="text" id="amount" required>
+          </div><br>
+          <div>
+            <label for="description">Choose description:</label>
+            <input list="descriptions" name="descriptions" required>
+            <datalist id="descriptions">
+                <option value="Electricity bill">
+                <option value="Water bill">
+                <option value="Daily necessities">
+                <option value="Groceries">
+                <option value="Bus fare">
+                <option value="fooding">
+                <option value="Health issues">
+            </datalist>
+          </div><br>
+          <div>
+            <label for="catagoty">Choose a catagory:</label>
+            <select name="catagory" id="catagory">
+                <option value="housing">Housing</option>
+                <option value="transportation">Transportation</option>
+                <option value="food">Food</option>
+                <option value="medical">Medical/Healthcare</option>
+            </select>
+          </div><br>
+          <input class="btn" type="submit" value="Add Expense">
+          <ul id="lists"></ul>
+          </form>
+          </section>
+          <script>
+            const form = document.getElementById('my-form');
+            const list = document.getElementById('lists');
+             form.addEventListener('submit', addExpense);
+              function addExpense(e)
+              {
+               e.preventDefault();
+               const amount = e.target.amount.value;
+               const description = e.target.descriptions.value;
+               const catagory = e.target.catagory.value;
+               const userdetail = {
+                 amount,
+                 description,
+                 catagory
+               }
+               localStorage.setItem(userdetail.amount, JSON.stringify(userdetail));
+               var li = document.createElement('li');
+               li.appendChild(document.createTextNode(amount+' - '+catagory+' - '+description));
+               var dlt = document.createElement('button');
+               dlt.appendChild(document.createTextNode('Delete Expense'));
+               li.appendChild(dlt);
+               dlt.onclick = () =>{
+                 localStorage.removeItem(userdetail.amount);
+                 list.removeChild(li);
+               }
+               var edit = document.createElement('button');
+               edit.appendChild(document.createTextNode('Edit Expense'));
+               li.appendChild(edit);
+               edit.onclick = () => {
+                 localStorage.removeItem(userdetail.amount);
+                 document.getElementById('amount').value = userdetail.amount;
+                 document.getElementById('descriptions').value = userdetail.descriptions;
+                 document.getElementById('catagory').value = userdetail.catagory;
+                 list.removeChild(li);
+               }
+               list.appendChild(li);
+             }
+       
+              </script>
+</body>
+</html>
