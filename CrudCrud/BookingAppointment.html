@@ -46,12 +46,34 @@
         }
         //localStorage.setItem(userdetail.email, JSON.stringify(userdetail));
         axios.post("https://crudcrud.com/api/134d0abf9b514c2bb98723622243e113/AppointmentData", userdetail)
-                  .then((response)=> {console.log(response);})
+                  .then((response)=> { 
+                    //console.log(response.data);
+                    ShowNewUserOnscreen(response.data);
+                  })
                   .catch((err)=> {
+                    document.body.innerHTML = document.body.innerHTML + "<h4>Something went wrong</h4>";
                     console.log(err);
                   })
+
+        
+      }
+      window.addEventListener("DOMContentLoaded", () =>{
+          axios.get("https://crudcrud.com/api/134d0abf9b514c2bb98723622243e113/AppointmentData")
+               .then((response) =>{
+                console.log(response.data);
+                for(var i=0;i< response.data.length; i++)
+                {
+                  ShowNewUserOnscreen(response.data[i]);
+                }
+               })
+               .catch((error)=>{
+                console.log(error);
+               })
+        })
+
+        function ShowNewUserOnscreen(obj){
         var li = document.createElement('li');
-        li.appendChild(document.createTextNode(Name+' - '+email));
+        li.appendChild(document.createTextNode(obj.Name+' - '+obj.email+' - '+obj.number));
         var dlt = document.createElement('button');
         dlt.appendChild(document.createTextNode('Delete'));
         li.appendChild(dlt);
@@ -64,12 +86,14 @@
         li.appendChild(edit);
         edit.onclick = () => {
           //localStorage.removeItem(userdetail.email);
-          document.getElementById('name').value = userdetail.Name;
-          document.getElementById('email').value = userdetail.email;
+          document.getElementById('name').value = obj.Name;
+          document.getElementById('email').value = obj.email;
+          document.getElementById('phone_number').value = obj.number;
           list.removeChild(li);
         }
         list.appendChild(li);
       }
+
     </script>
 </body>
 </html>
