@@ -85,17 +85,21 @@
             list.removeChild(li);
           })
           .catch(err => console.error(err));
-          list.removeChild(li);
         }
         var edit = document.createElement('button');
         edit.appendChild(document.createTextNode('Edit'));
         li.appendChild(edit);
         edit.onclick = () => {
           //localStorage.removeItem(userdetail.email);
+          axios.delete(`https://crudcrud.com/api/3ecb4e4d0ac14b399ee62de52a71a273/AppointmentData/${obj._id}`)
+          .then((res) => {
           document.getElementById('name').value = obj.Name;
           document.getElementById('email').value = obj.email;
           document.getElementById('phone_number').value = obj.number;
           list.removeChild(li);
+          })
+          .catch(err => console.error(err));
+         
         }
         list.appendChild(li);
       }
