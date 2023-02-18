@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Admin</title>
+</head>
+<body>
+        <form id="my-form">
+          
+            <label for="amount">Choose expenseamount:</label>
+            <input type="number" id="amount" required>
+        
+            <label for="product">Product Name:</label>
+            <input type="text" id="product" name="product"required>
+        
+            <label for="catagoty">Choose a catagory:</label>
+            <select name="catagory" id="catagory">
+                <option value="electronic">Electronic</option>
+                <option value="food">Food</option>
+                <option value="skincare">Skincare</option>
+            </select>
+          <input type="submit" value ="Add Product">
+          <br>
+          <h4>Products</h4>
+          <ul id="electronic">Electronic Items</ul>
+          <ul id="food">Food Items</ul>
+          <ul id="skincare">Skincare Items</ul>
+          </form>
+          
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.3/axios.min.js"></script>
+          <script>
+             const form = document.getElementById('my-form');
+             const Electronic = document.getElementById('electronic');
+             const Food = document.getElementById('food');
+             const Skincare = document.getElementById('skincare');
+      form.addEventListener('submit', addItem);
+       function addItem(e)
+       {
+        e.preventDefault();
+        const amount = e.target.amount.value;
+        const catagory = e.target.catagory.value;
+        const product = e.target.product.value;
+        const productdetail = {
+          amount,
+          catagory,
+          product
+        }
+        axios.post("https://crudcrud.com/api/3ab5968cc9a342408dc5eae38c01f7b2/PrductDetail", productdetail)
+                  .then((response)=> { 
+                    //console.log(response.data);
+                    ShowNewUserOnscreen(response.data);
+                  })
+                  .catch((err)=> {
+                    document.body.innerHTML = document.body.innerHTML + "<h4>Something went wrong</h4>";
+                    console.log(err);
+                  })
+        
+      }
+      
+      
+      window.addEventListener("DOMContentLoaded", () =>{
+          axios.get("https://crudcrud.com/api/3ab5968cc9a342408dc5eae38c01f7b2/ProductDetail")
+               .then((response) =>{
+                console.log(response.data);
+                for(var i=0;i< response.data.length; i++)
+                {
+                  ShowNewUserOnscreen(response.data[i]);
+                }
+               })
+               .catch((error)=>{
+                console.log(error);
+               })
+            })
+     
+        function ShowNewUserOnscreen(obj){
+        var li = document.createElement('li');
+        li.appendChild(document.createTextNode(obj.amount+' - '+obj.catagory+' - '+obj.product));
+        var dlt = document.createElement('button');
+        dlt.appendChild(document.createTextNode('Delete product'));
+        li.appendChild(dlt);
+        if(obj.catagory==="electronic")
+        {
+            Electronic.appendChild(li);
+        }
+        else if(obj.catagory==="food"){
+            Food.appendChild(li);
+        }
+        else{
+            Skincare.appendChild(li);
+        }
+    }
+          </script>
+</body>
+</html>
