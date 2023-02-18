@@ -90,6 +90,25 @@
         else{
             Skincare.appendChild(li);
         }
+        dlt.onclick = () =>{
+          axios.delete(`https://crudcrud.com/api/3ab5968cc9a342408dc5eae38c01f7b2/PrductDetail/${obj._id}`)
+          .then((res) => {
+            if(obj.catagory==="electronic")
+            {
+            Electronic.removeChild(li);
+            }
+           else if(obj.catagory==="food")
+           {
+            Food.removeChild(li);
+           }
+           else
+           {
+            Skincare.removeChild(li);
+           }
+            
+          })
+          .catch(err => console.error(err));
+        }
     }
           </script>
 </body>
